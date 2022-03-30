@@ -47,10 +47,10 @@
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $product->name }}</td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
+                                            <td>{{ $product->description }}</td>
+                                            <td>{{ $product->price }}</td>
+                                            <td>{{ $product->qty }}</td>
+                                            <td><img src="{{ Storage::url($product->image) }}" alt="{{ $product->name }}" width="100"></td>
                                             <td></td>
                                             <td></td>
                                         </tr>
