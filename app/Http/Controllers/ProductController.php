@@ -97,9 +97,11 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product $product)
+    public function edit($id)
     {
-        //
+        //edit page
+        $product = Product::find($id);
+        return view('product.edit', compact('product'));
     }
 
     /**
@@ -109,9 +111,39 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, $id)
     {
-        //
+        //validate
+        $this->validate($request, [
+            'name' => 'required',
+            'description' => 'required',
+            'price' => 'required',
+            'qty' => 'required',
+            'status' => 'required',
+            'image' => 'nullable|image',
+        ]);
+        $product = Product::find($id);
+        $image_path = '';
+        $product->name = $request->input('name');
+        $product->description = $request->input('description');
+        $product->price = $request->input('price');
+        $product->qty = $request->input('qty');
+        $product->status = $request->input('status');
+        $images = $request->file('images');
+
+        //cek apakah ada file image yang di upload
+        if ($images) {
+            if ($product->image && file_exists(storage_path('app/public/' . $product->image))) {
+                Storage::delete('public/' . $product->image);
+            }
+            $image_path = $images->store('public/images');
+            $product->image = $image_path;
+        }
+        if (!$product->save()) {
+            return redirect()->back()->with('errors', 'Data gagal disimpan');
+        } else {
+            return redirect()->route('product.index')->with('success', 'Data berhasil disimpan');
+        }
     }
 
     /**
@@ -120,8 +152,15 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy($id)
     {
-        //
+        //destroy data
+        $product = Product::find($id);
+        //delete image
+        Storage::delete($product->image);
+        //delete data
+        $product->delete();
+        //redirect ke halaman indexproduct
+        return redirect()->route('product.index')->with('success', 'Data berhasil dihapus');
     }
 }
