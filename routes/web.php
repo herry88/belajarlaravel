@@ -30,3 +30,7 @@ Route::get('/hello', function () {
 //rute product dari controller
 Route::resource('product', \App\Http\Controllers\ProductController::class);
 Route::get('product/destroy/{id}', [\App\Http\Controllers\ProductController::class, 'destroy'])->name('product.destroy');
+
+
+//rute unit
+Route::resource('unit', \App\Http\Controllers\UnitController::class);
