@@ -54,7 +54,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{ route('unit.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
                             Data Unit
@@ -66,6 +66,14 @@
                         <i class="nav-icon fas fa-th"></i>
                         <p>
                             Data PPN
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            Transaksi Penjualan
                         </p>
                     </a>
                 </li>
