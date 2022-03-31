@@ -34,3 +34,7 @@ Route::get('product/destroy/{id}', [\App\Http\Controllers\ProductController::cla
 
 //rute unit
 Route::resource('unit', \App\Http\Controllers\UnitController::class);
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
