@@ -77,24 +77,44 @@
                             </p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" onclick="document.getElementById('logout-form').submit()">
+                            <i class="nav-icon fas fa-sign-out-alt"></i>
+                            <p>Logout</p>
+                            <form action="{{ route('logout') }}" method="POST" id="logout-form">
+                                @csrf
+                            </form>
+                        </a>
+                    </li>
                 @else
-                <li class="nav-item">
-                    <a href="#" class="nav-link active">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
-                        <p>
-                            Dashboard
-                        </p>
-                    </a>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link active">
+                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <p>
+                                Dashboard
+                            </p>
+                        </a>
 
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-th"></i>
-                        <p>
-                            Transaksi Penjualan
-                        </p>
-                    </a>
-                </li>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-th"></i>
+                            <p>
+                                Transaksi Penjualan
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" onclick="document.getElementById('logout-form').submit()">
+                            <i class="nav-icon fas fa-sign-out-alt"></i>
+                            <p>
+                                Logout
+                            </p>
+                            <form action="{{ route('login') }}" method="post" id="logout-form">
+                                @csrf
+                            </form>
+                        </a>
+                    </li>
                 @endif
 
             </ul>
