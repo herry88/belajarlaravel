@@ -22,11 +22,28 @@ Route::get('/hello', function () {
     return 'Hello World!';
 });
 
-//rute dengan parameter
-// Route::get('/product/{namaproduct}', function ($namaproduct) {
-//     return '<h1>Ini adalah :</h1> '.$namaproduct;
+//rute logiin setiap halaman
+Route::group(['prefix' => 'admin'], function () {
+    Route::resource('product', \App\Http\Controllers\ProductController::class)->middleware('auth');
+    Route::get('product/destroy/{id}', [\App\Http\Controllers\ProductController::class, 'destroy'])->name('product.destroy')->middleware('auth');
+});
+
+
+
+Route::resource('unit', \App\Http\Controllers\UnitController::class);
+// Route::group(['middleware' => 'auth'], function () {
+//     //halaman product
+//     // Route::resource('product', \App\Http\Controllers\ProductController::class);
+//     // Route::get('product/destroy/{id}', [\App\Http\Controllers\ProductController::class, 'destroy'])->name('product.destroy');
+
+//     //halaman unit
+//     Route::resource('unit', \App\Http\Controllers\UnitController::class);
 // });
 
-//rute product dari controller
-Route::resource('product', \App\Http\Controllers\ProductController::class);
-Route::get('product/destroy/{id}', [\App\Http\Controllers\ProductController::class, 'destroy'])->name('product.destroy');
+// Route::resource('product', \App\Http\Controllers\ProductController::class)->middleware('auth');
+// Route::get('product/destroy/{id}', [\App\Http\Controllers\ProductController::class, 'destroy'])->name('product.destroy')->middleware('auth');
+
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
