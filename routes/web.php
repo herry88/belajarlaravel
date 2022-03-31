@@ -26,11 +26,12 @@ Route::get('/hello', function () {
 Route::group(['prefix' => 'admin'], function () {
     Route::resource('product', \App\Http\Controllers\ProductController::class)->middleware('auth');
     Route::get('product/destroy/{id}', [\App\Http\Controllers\ProductController::class, 'destroy'])->name('product.destroy')->middleware('auth');
+    Route::resource('unit', \App\Http\Controllers\UnitController::class)->middleware('auth');
 });
 
 
 
-Route::resource('unit', \App\Http\Controllers\UnitController::class);
+
 // Route::group(['middleware' => 'auth'], function () {
 //     //halaman product
 //     // Route::resource('product', \App\Http\Controllers\ProductController::class);
